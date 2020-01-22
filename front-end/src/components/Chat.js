@@ -37,6 +37,7 @@ const Chat = () => {
     const newMessage = { name, message: messageString }
     ws.send(JSON.stringify(newMessage))
     addMessage(newMessage)
+    console.log(messages)
   }
 
   return (
