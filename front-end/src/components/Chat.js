@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import ChatInput from './ChatInput'
 import ChatMessage from './ChatMessage'
+import axios from 'axios';
 
 const URL = "ws://localhost:3001"
 
 const Chat = () => {
-  const [name, setName] = useState("Matt")
+  const [name, setName] = useState("")
   const [messages, setMessages] = useState([])
   const addMessage = (msg) => {
-    console.log('test')
     setMessages(messages => [
       ...messages,
       msg
@@ -18,6 +18,9 @@ const Chat = () => {
   const ws = new WebSocket(URL)
 
   useEffect(() => {
+    axios.get('http://localhost:3001/messages').then(res => {
+      setMessages(res.data)
+    })
     ws.onopen = () => {
       console.log('connected')
     }
@@ -27,6 +30,7 @@ const Chat = () => {
       addMessage(message)
     }
 
+    console.log("MESSAGES: ", messages)
     return () => {
       ws.onclose = () => {
         console.log('disconnected')
@@ -55,10 +59,10 @@ const Chat = () => {
         ws={ws}
         onSubmitMessage={messageString => submitMessage(messageString)}
       />
-      {messages.map((message, index) => {
+      {messages.map((message) => {
         return (
           <ChatMessage
-            key={index}
+            key={message._id}
             message={message.message}
             name={message.name}
           />
