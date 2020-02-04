@@ -49,7 +49,7 @@ wss.on('connection', (ws) => {
   ws.on('message', (data) => {
     console.log(`${JSON.parse(data).name} said: ${JSON.parse(data).message}`)
     wss.clients.forEach((client) => {
-      if (client !== ws && client.readyState == WebSocket.OPEN) {
+      if (client.readyState == WebSocket.OPEN) {
         client.send(data);
       }
     })

@@ -8,7 +8,8 @@ const Chat = () => {
   const [name, setName] = useState("Matt")
   const [messages, setMessages] = useState([])
   const addMessage = (msg) => {
-    setMessages([
+    console.log('test')
+    setMessages(messages => [
       ...messages,
       msg
     ])
@@ -36,8 +37,6 @@ const Chat = () => {
   const submitMessage = messageString => {
     const newMessage = { name, message: messageString }
     ws.send(JSON.stringify(newMessage))
-    addMessage(newMessage)
-    console.log(messages)
   }
 
   return (
