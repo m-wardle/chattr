@@ -6,7 +6,9 @@ const database = require('./db/db');
 const WebSocket = require('ws');
 
 const messageRoute = require('./routes/message.routes');
-const MessageSchema = require('./models/message-schema');
+const MessagesSchema = require('./models/message-schema');
+const UsersSchema = require('./models/user-schema');
+require('./config/passport');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(database.db, {
@@ -46,7 +48,7 @@ wss.on('connection', (ws) => {
   ws.on('message', (data) => {
     console.log(`${JSON.parse(data).name} said: ${JSON.parse(data).message}`);
 
-    let msg = new MessageSchema({
+    let msg = new MessagesSchema({
       name: JSON.parse(data).name,
       message: JSON.parse(data).message
     });
