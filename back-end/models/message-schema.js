@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let messageSchema = new Schema(
+// TODO: Add submission time.
+
+let MessagesSchema = new Schema(
   {
     name: {
       type: String
@@ -15,4 +17,4 @@ let messageSchema = new Schema(
   }
 )
 
-module.exports = mongoose.model('Message', messageSchema)
+module.exports = mongoose.model('Messages', MessagesSchema)
