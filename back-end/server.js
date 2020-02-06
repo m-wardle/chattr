@@ -5,9 +5,10 @@ const bodyParser = require('body-parser')
 const database = require('./db/db');
 const WebSocket = require('ws');
 
-const messageRoute = require('./routes/message.routes');
+const messageRoute = require('./routes/api/messages');
 const MessagesSchema = require('./models/message-schema');
 const UsersSchema = require('./models/user-schema');
+const userRoute = require('./routes/api/users');
 require('./config/passport');
 
 mongoose.Promise = global.Promise;
@@ -28,7 +29,9 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(cors());
-app.use('/messages', messageRoute)
+// app.use('/messages', messageRoute);
+// app.use('/users', userRoute);
+app.use(require('./routes'));
 
 const port = process.env.PORT || 3001;
 const server = app.listen(port, () => {

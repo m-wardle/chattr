@@ -18,7 +18,7 @@ const Chat = () => {
   const ws = new WebSocket(URL)
 
   useEffect(() => {
-    axios.get('http://localhost:3001/messages').then(res => {
+    axios.get('http://localhost:3001/api/messages').then(res => {
       setMessages(res.data)
     })
     ws.onopen = () => {
