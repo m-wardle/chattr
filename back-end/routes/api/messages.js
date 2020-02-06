@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
-const message = require("../models/message-schema");
+const Messages = require("../../models/message-schema");
 
 router.route('/').get((req, res) => {
   console.log("Request Received at Messages")
-  message.find((err, data) => {
+  Messages.find((err, data) => {
     if (err) {
       return next(err);
     } else {
